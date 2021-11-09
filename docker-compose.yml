@@ -1,0 +1,25 @@
+
+version: "3"
+services:
+    account:
+        build:
+            context: ./4-account-service-gateway/
+        depends_on:
+            - discovery
+    transaction:
+        build:
+            context: ./4-transaction-service-gateway/
+        depends_on:
+             - discovery
+    discovery:
+        build:
+            context: ./3-service-discovery/
+        ports:
+            - "8761:8761"
+    gateway:
+        build:
+            context: ./4-service-gateway
+        ports:
+             - "8084:8084"
+        depends_on:
+             - account
