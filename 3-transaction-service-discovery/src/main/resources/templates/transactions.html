@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <a th:href="@{${accountURL}}">Go to accounts</a> <br>
     <a th:href="@{${baseUrl} + '/transaction/form'}">Create new transaction</a>
     <ul>
         <li th:each="transaction: ${transactions}"><span th:text="${transaction}"></span></li>

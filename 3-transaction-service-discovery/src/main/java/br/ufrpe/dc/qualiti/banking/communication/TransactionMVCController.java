@@ -30,6 +30,11 @@ public class TransactionMVCController {
     public String getUrl() {
         return this.baseUrl;
     }
+    
+    @ModelAttribute("accountURL")
+    public String getAccountURL() {
+    	return transacationController.getAccountURL();
+    }
 
     @GetMapping("/account/{accountId}")
     public String getTransactions(@PathVariable(name = "accountId") Long accountId, Model model) {
@@ -41,6 +46,8 @@ public class TransactionMVCController {
     public String getTransactionForm() {
         return "transaction_form";
     }
+    
+
 
     @PostMapping("/form")
     public String newTransaction(

@@ -66,6 +66,12 @@ public class AccountMVCController {
     public Map<String, Boolean> enoughBalance(@PathVariable Long id, @PathVariable Long value) {
         return Collections.singletonMap("enoughBalance", controller.enoughBalance(id, value));
     }
+    
+    @GetMapping("/accountURL")
+    @ResponseBody
+    public String getAccountURL() {
+    	return this.baseUrl+"/account";
+    }
 
     @PutMapping("/{id}/balance")
     @ResponseBody

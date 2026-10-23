@@ -13,6 +13,10 @@ public class TransactionController {
     public Iterable<Transaction> getAllFrom(Long accountId) {
         return transactionCollection.getAllFrom(accountId);
     }
+    
+    public String getAccountURL(){
+    	return accountService.getAccountURL();
+    }
 
     @Transactional
     public void doTransaction(TransactionDTO transactionDTO) throws NotEnoughBalanceException {

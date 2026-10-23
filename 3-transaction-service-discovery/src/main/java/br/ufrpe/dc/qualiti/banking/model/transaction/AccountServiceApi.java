@@ -16,6 +16,11 @@ public class AccountServiceApi implements IAccountService {
         return wBuilder.baseUrl("lb://account").build();
     }
 
+    
+    public String getAccountURL() {
+    	return client().get().uri("/account/accountURL").retrieve().bodyToMono(String.class).block();
+    }
+    
     @Override
     public boolean enoughBalance(Long accountId, Long valueToBeDecreased) {
         return (boolean)

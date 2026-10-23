@@ -24,51 +24,52 @@ import br.ufrpe.dc.qualiti.banking.model.account.AccountDTO;
 @Slf4j
 public class AccountMVCController {
 
-    @Autowired private AccountController controller;
+	@Autowired
+	private AccountController controller;
 
-    @Value("${base_url}")
-    private String baseUrl;
+	@Value("${base_url}")
+	private String baseUrl;
 
-    @Value("${transaction_service_url}")
-    private String transactionUrl;
+	@Value("${transaction_service_url}")
+	private String transactionUrl;
 
-    @ModelAttribute("baseUrl")
-    public String getUrl() {
-        return this.baseUrl;
-    }
+	@ModelAttribute("baseUrl")
+	public String getUrl() {
+		return this.baseUrl;
+	}
 
-    @ModelAttribute("transactionUrl")
-    private String getTransactionUrl() {
-        return transactionUrl;
-    }
+	@ModelAttribute("transactionUrl")
+	private String getTransactionUrl() {
+		return transactionUrl;
+	}
 
-    @GetMapping("")
-    public String getAccounts(Model model) {
-        model.addAttribute("accounts", controller.getAll());
-        return "accounts";
-    }
+	@GetMapping("")
+	public String getAccounts(Model model) {
+		model.addAttribute("accounts", controller.getAll());
+		return "accounts";
+	}
 
-    @GetMapping("/form")
-    public String getAccountForm() {
-        return "account_form";
-    }
+	@GetMapping("/form")
+	public String getAccountForm() {
+		return "account_form";
+	}
 
-    @PostMapping("/form")
-    public String newAccount(@ModelAttribute AccountDTO accountDTO) {
-        controller.create(accountDTO);
-        return "redirect:/account";
-    }
+	@PostMapping("/form")
+	public String newAccount(@ModelAttribute AccountDTO accountDTO) {
+		controller.create(accountDTO);
+		return "redirect:/account";
+	}
 
-    @GetMapping("/{id}/enoughBalance/{value}")
-    @ResponseBody
-    public Map<String, Boolean> enoughBalance(@PathVariable Long id, @PathVariable Long value) {
-        return Collections.singletonMap("enoughBalance", controller.enoughBalance(id, value));
-    }
+	@GetMapping("/{id}/enoughBalance/{value}")
+	@ResponseBody
+	public Map<String, Boolean> enoughBalance(@PathVariable Long id, @PathVariable Long value) {
+		return Collections.singletonMap("enoughBalance", controller.enoughBalance(id, value));
+	}
 
-    @PutMapping("/{id}/balance")
-    @ResponseBody
-    public void updateBalance(@PathVariable Long id, @RequestBody Long value) {
-        log.info(String.format("%s -> %s", id, value));
-        controller.updateBalance(id, value);
-    }
+	@PutMapping("/{id}/balance")
+	@ResponseBody
+	public void updateBalance(@PathVariable Long id, @RequestBody Long value) {
+		log.info(String.format("%s -> %s", id, value));
+		controller.updateBalance(id, value);
+	}
 }
